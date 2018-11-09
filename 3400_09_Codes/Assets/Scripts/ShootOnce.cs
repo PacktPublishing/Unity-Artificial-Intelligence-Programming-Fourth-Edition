@@ -4,16 +4,14 @@ using Pada1.BBCore;           // Code attributes
 using Pada1.BBCore.Tasks;     // TaskStatus
 using BBUnity.Actions;        // GOAction
 
-namespace BBSamples.PQSG // Programmers Quick Start Guide
-{
     /// <summary>
     /// DoneShootOnce is a action inherited from GOAction and Clone a 'bullet' and shoots 
     /// it throught the Forward axis with the specified velocity.
     /// </summary>
-    [Action("Samples/ProgQuickStartGuide/ShootOnce")]
+    [Action("Chapter09/ShootOnce")]
     [Help("Clone a 'bullet' and shoots it throught the Forward axis with the " +
           "specified velocity.")]
-    public class DoneShootOnce : GOAction
+    public class ShootOnce : GOAction
     {
 
         ///<value>Input shootPoint Parameter.</value>
@@ -79,6 +77,4 @@ namespace BBSamples.PQSG // Programmers Quick Start Guide
             return TaskStatus.COMPLETED;
         } // OnUpdate
 
-    } // class DoneShootOnce
-
-} // namespace
+    }

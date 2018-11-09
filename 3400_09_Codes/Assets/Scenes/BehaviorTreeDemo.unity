@@ -112,7 +112,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 26d34db2d1360c54399eaf11bc2b214c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: f5ff39ebd4ecd5f488c0ed42d513e897, type: 2}
 --- !u!1 &99947096
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &99947097
 MeshRenderer:
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTasksPerTick: 500
-  behavior: {fileID: 11400000, guid: 94f7b8d9d503df647aec1b5cdce03b4b, type: 2}
+  behavior: {fileID: 11400000, guid: 617eb351eb6e2a64798c9b6c3423d876, type: 2}
   paused: 0
   restartWhenFinished: 0
   blackboard:
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTasksPerTick: 500
-  behavior: {fileID: 11400000, guid: cefec543fe1d8774aa0b18d5ab374a84, type: 2}
+  behavior: {fileID: 11400000, guid: f46677e0463f8e044a1b93d3c66d65e2, type: 2}
   paused: 0
   restartWhenFinished: 0
   blackboard:
@@ -415,7 +415,7 @@ MonoBehaviour:
     - {fileID: 100000, guid: c960b0a8d3f789c4ea257bb6a16ab2a2, type: 2}
     objectParamsNames:
     - player
-    - wanderArea
+    - floor
     - shootPoint
     - bullet
     objectParamsLostDefaultValue: 
@@ -478,7 +478,6 @@ GameObject:
   m_Component:
   - component: {fileID: 799500329}
   - component: {fileID: 799500328}
-  - component: {fileID: 799500327}
   - component: {fileID: 799500326}
   - component: {fileID: 799500325}
   m_Layer: 0
@@ -496,13 +495,6 @@ AudioListener:
   m_GameObject: {fileID: 799500324}
   m_Enabled: 1
 --- !u!124 &799500326
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 799500324}
-  m_Enabled: 1
---- !u!92 &799500327
 Behaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -637,7 +629,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1045661404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f162970f04d52cb4d93266ffe430e318, type: 3}
+  m_Script: {fileID: 11500000, guid: b156e88668a71a84781904acf6f56dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dayDuration: 10
@@ -686,7 +678,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &2016349710
 MeshRenderer:

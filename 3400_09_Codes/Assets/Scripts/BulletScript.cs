@@ -3,7 +3,7 @@
 /// <summary>
 /// Component used to destroy itself, in this case for the bullets.
 /// </summary>
-public class DoneBulletScript : MonoBehaviour
+public class BulletScript : MonoBehaviour
 {
 
     // Use this for initialization
