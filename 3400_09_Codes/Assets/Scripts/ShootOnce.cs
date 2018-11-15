@@ -9,7 +9,7 @@ using BBUnity.Actions;        // GOAction
     /// it throught the Forward axis with the specified velocity.
     /// </summary>
     [Action("Chapter09/ShootOnce")]
-    [Help("Clone a 'bullet' and shoots it throught the Forward axis with the " +
+    [Help("Clone a 'bullet' and shoots it through the Forward axis with the " +
           "specified velocity.")]
     public class ShootOnce : GOAction
     {
