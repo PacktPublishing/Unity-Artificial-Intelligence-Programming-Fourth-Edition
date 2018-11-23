@@ -51,7 +51,7 @@ public class AICar_Script : MonoBehaviour
 
 	    // This is to limith the maximum speed of the car, adjusting the drag probably isn't the best way of doing it,
 	    // but it's easy, and it doesn't interfere with the physics processing.
-	    rigidbody.drag = rigidbody.velocity.magnitude / 250;
+	    GetComponent<Rigidbody>().drag = GetComponent<Rigidbody>().velocity.magnitude / 250;
     	
 	    // Call the funtion to determine the desired input values for the car. This essentially steers and
 	    // applies gas to the engine.

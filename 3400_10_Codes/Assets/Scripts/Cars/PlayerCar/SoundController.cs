@@ -170,7 +170,7 @@ public class SoundController : MonoBehaviour
     }
 
     void Update (){
-	    float carSpeed = car.rigidbody.velocity.magnitude;
+	    float carSpeed = car.GetComponent<Rigidbody>().velocity.magnitude;
 	    float carSpeedFactor = Mathf.Clamp01(carSpeed / car.topSpeed);
 	
 	    KAudio.volume = Mathf.Lerp(0, KVolume, carSpeedFactor);

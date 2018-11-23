@@ -37,7 +37,7 @@ public class Car : MonoBehaviour
     protected float handbrakeTime = 0.0f;
     protected float handbrakeTimer = 1.0f;
     protected Skidmarks skidmarks = null;
-    protected ParticleEmitter skidSmoke = null;
+    protected ParticleSystem skidSmoke = null;
     protected SoundController sound = null;
     protected float accelerationTimer;
     protected bool canSteer;
@@ -92,7 +92,7 @@ public class Car : MonoBehaviour
         if (bDead)
             return;
 
-	    Vector3 relativeVelocity = transform.InverseTransformDirection(rigidbody.velocity);
+	    Vector3 relativeVelocity = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity);
 	
 	    Check_If_Car_Is_Flipped();
 	    UpdateWheelGraphics(relativeVelocity);
@@ -108,7 +108,7 @@ public class Car : MonoBehaviour
             return;
 
 	    // The rigidbody velocity is always given in world space, but in order to work in local space of the car model we need to transform it first.
-	    Vector3 relativeVelocity = transform.InverseTransformDirection(rigidbody.velocity);
+	    Vector3 relativeVelocity = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity);
 	
 	    CalculateState();	
 	    UpdateFriction(relativeVelocity);
@@ -180,7 +180,7 @@ public class Car : MonoBehaviour
         wheel.tireGraphic = (Transform)wheelTransform.GetComponentsInChildren(typeof(Transform))[1];
 
         //wheelRadius = wheel.tireGraphic.renderer.bounds.size.y / 2;	
-        wheelRadius = wheel.tireGraphic.renderer.bounds.size.y / 1;	
+        wheelRadius = wheel.tireGraphic.GetComponent<Renderer>().bounds.size.y / 1;	
 	    wheel.collider.radius = wheelRadius;
 
 
@@ -206,7 +206,7 @@ public class Car : MonoBehaviour
     protected void SetupCenterOfMass()
     {
 	    if(centerOfMass != null)
-		    rigidbody.centerOfMass = centerOfMass.localPosition;
+		    GetComponent<Rigidbody>().centerOfMass = centerOfMass.localPosition;
     }
 
     protected void SetupGears()
@@ -240,7 +240,7 @@ public class Car : MonoBehaviour
 	    if(FindObjectOfType(typeof(Skidmarks)))
 	    {
 		    skidmarks = FindObjectOfType(typeof(Skidmarks)) as Skidmarks;
-		    skidSmoke = skidmarks.GetComponentInChildren<ParticleEmitter>();
+		    skidSmoke = skidmarks.GetComponentInChildren<ParticleSystem>();
 	    }
 	    else
 		    //Debug.Log("No skidmarks object found. Skidmarks will not be drawn");
@@ -298,8 +298,8 @@ public class Car : MonoBehaviour
     {
 	    transform.rotation = Quaternion.LookRotation(transform.forward);
 	    transform.position += Vector3.up * 0.5f;
-	    rigidbody.velocity = Vector3.zero;
-	    rigidbody.angularVelocity = Vector3.zero;
+	    GetComponent<Rigidbody>().velocity = Vector3.zero;
+	    GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 	    resetTimer = 0;
 	    currentEnginePower = 0;
     }
@@ -318,7 +318,7 @@ public class Car : MonoBehaviour
 		    if(wheel.GetGroundHit(out wh))
 		    {
 			    w.wheelGraphic.localPosition = wheel.transform.up * (wheelRadius + wheel.transform.InverseTransformPoint(wh.point).y);
-			    w.wheelVelo = rigidbody.GetPointVelocity(wh.point);
+			    w.wheelVelo = GetComponent<Rigidbody>().GetPointVelocity(wh.point);
 			    w.groundSpeed = w.wheelGraphic.InverseTransformDirection(w.wheelVelo);
 			
 			    // Code to handle skidmark drawing. Not covered in the tutorial
@@ -337,10 +337,11 @@ public class Car : MonoBehaviour
 					    float skidGroundSpeed= Mathf.Abs(w.groundSpeed.x) - 15;
 					    if(skidGroundSpeed > 0 || handbrakeSkidding > 0)
 					    {
-						    Vector3 staticVel = transform.TransformDirection(skidSmoke.localVelocity) + skidSmoke.worldVelocity;
+                            // Vector3 staticVel = transform.TransformDirection(skidSmoke.particleEmitter.loca) + skidSmoke.worldVelocity;
+                            Vector3 staticVel = transform.position;
 						    if(w.lastSkidmark != -1)
 						    {
-							    float emission = UnityEngine.Random.Range(skidSmoke.minEmission, skidSmoke.maxEmission);
+							    float emission = UnityEngine.Random.Range(skidSmoke.emission.rateOverTime.constantMin, skidSmoke.emission.rateOverTime.constantMax);
 							    float lastParticleCount = w.lastEmitTime * emission;
 							    float currentParticleCount = Time.time * emission;
 							    int noOfParticles = Mathf.CeilToInt(currentParticleCount) - Mathf.CeilToInt(lastParticleCount);
@@ -349,18 +350,18 @@ public class Car : MonoBehaviour
 							    for(float i = 0; i <= noOfParticles; i++)
 							    {
 								    float particleTime = Mathf.InverseLerp(lastParticleCount, currentParticleCount, lastParticle + i);
-								    skidSmoke.Emit(	Vector3.Lerp(w.lastEmitPosition, wh.point, particleTime) + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), staticVel + (w.wheelVelo * 0.05f), Random.Range(skidSmoke.minSize, skidSmoke.maxSize) * Mathf.Clamp(skidGroundSpeed * 0.1f,0.5f,1), Random.Range(skidSmoke.minEnergy, skidSmoke.maxEnergy), Color.white);
+								    // skidSmoke.Emit(	Vector3.Lerp(w.lastEmitPosition, wh.point, particleTime) + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), staticVel + (w.wheelVelo * 0.05f), Random.Range(skidSmoke.minSize, skidSmoke.maxSize) * Mathf.Clamp(skidGroundSpeed * 0.1f,0.5f,1), Random.Range(skidSmoke.minEnergy, skidSmoke.maxEnergy), Color.white);
 							    }
 						    }
 						    else
 						    {
-							    skidSmoke.Emit(	wh.point + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), staticVel + (w.wheelVelo * 0.05f), Random.Range(skidSmoke.minSize, skidSmoke.maxSize) * Mathf.Clamp(skidGroundSpeed * 0.1f,0.5f,1), Random.Range(skidSmoke.minEnergy, skidSmoke.maxEnergy), Color.white);
+							    // skidSmoke.Emit(	wh.point + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), staticVel + (w.wheelVelo * 0.05f), Random.Range(skidSmoke.minSize, skidSmoke.maxSize) * Mathf.Clamp(skidGroundSpeed * 0.1f,0.5f,1), Random.Range(skidSmoke.minEnergy, skidSmoke.maxEnergy), Color.white);
 						    }
 					
 						    w.lastEmitPosition = wh.point;
 						    w.lastEmitTime = Time.time;
 					
-						    w.lastSkidmark = skidmarks.AddSkidMark(wh.point + rigidbody.velocity * dt, wh.normal, (skidGroundSpeed * 0.1f + handbrakeSkidding) * Mathf.Clamp01(wh.force / wheel.suspensionSpring.spring), w.lastSkidmark);
+						    w.lastSkidmark = skidmarks.AddSkidMark(wh.point + GetComponent<Rigidbody>().velocity * dt, wh.normal, (skidGroundSpeed * 0.1f + handbrakeSkidding) * Mathf.Clamp01(wh.force / wheel.suspensionSpring.spring), w.lastSkidmark);
 						    sound.Skid(true, Mathf.Clamp01(skidGroundSpeed * 0.1f));
 					    }
 					    else
@@ -431,8 +432,8 @@ public class Car : MonoBehaviour
 	    if(initialDragMultiplierX > dragMultiplier.x) // Handbrake code
 	    {			
 		    drag.x /= (relativeVelocity.magnitude / (topSpeed / ( 1 + 2 * handbrakeXDragFactor ) ) );
-		    drag.z *= (1 + Mathf.Abs(Vector3.Dot(rigidbody.velocity.normalized, transform.forward)));
-		    drag += rigidbody.velocity * Mathf.Clamp01(rigidbody.velocity.magnitude / topSpeed);
+		    drag.z *= (1 + Mathf.Abs(Vector3.Dot(GetComponent<Rigidbody>().velocity.normalized, transform.forward)));
+		    drag += GetComponent<Rigidbody>().velocity * Mathf.Clamp01(GetComponent<Rigidbody>().velocity.magnitude / topSpeed);
 	    }
 	    else // No handbrake
 	    {
@@ -443,7 +444,7 @@ public class Car : MonoBehaviour
 		    drag.x = -relativeVelocity.x * dragMultiplier.x;
 		
 
-	    rigidbody.AddForce(transform.TransformDirection(drag) * rigidbody.mass * Time.deltaTime);
+	    GetComponent<Rigidbody>().AddForce(transform.TransformDirection(drag) * GetComponent<Rigidbody>().mass * Time.deltaTime);
     }
 
     protected void UpdateFriction(Vector3 relativeVelocity)
@@ -510,12 +511,12 @@ public class Car : MonoBehaviour
 		    if (HaveTheSameSign(relativeVelocity.z, throttle))
 		    {
 			    if (!handbrake)
-				    throttleForce = Mathf.Sign(throttle) * currentEnginePower * rigidbody.mass;
+				    throttleForce = Mathf.Sign(throttle) * currentEnginePower * GetComponent<Rigidbody>().mass;
 		    }
 		    else
-			    brakeForce = Mathf.Sign(throttle) * engineForceValues[0] * rigidbody.mass;
+			    brakeForce = Mathf.Sign(throttle) * engineForceValues[0] * GetComponent<Rigidbody>().mass;
 		
-		    rigidbody.AddForce(transform.forward * Time.deltaTime * (throttleForce + brakeForce));
+		    GetComponent<Rigidbody>().AddForce(transform.forward * Time.deltaTime * (throttleForce + brakeForce));
 	    }
     }
 
@@ -524,7 +525,7 @@ public class Car : MonoBehaviour
 	    if(canSteer)
 	    {
 		    float turnRadius = 3.0f / Mathf.Sin((90 - (steer * 30)) * Mathf.Deg2Rad);
-		    float minMaxTurn = EvaluateSpeedToTurn(rigidbody.velocity.magnitude);
+		    float minMaxTurn = EvaluateSpeedToTurn(GetComponent<Rigidbody>().velocity.magnitude);
 		    float turnSpeed = Mathf.Clamp(relativeVelocity.z / turnRadius, -minMaxTurn / 10, minMaxTurn / 10);
 		
 		    transform.RotateAround(	transform.position + transform.right * turnRadius * steer, 
@@ -541,15 +542,15 @@ public class Car : MonoBehaviour
 			    float rotationDirection = Mathf.Sign(steer); // rotationDirection is -1 or 1 by default, depending on steering
 			    if(steer == 0)
 			    {
-				    if(rigidbody.angularVelocity.y < 1) // If we are not steering and we are handbraking and not rotating fast, we apply a random rotationDirection
+				    if(GetComponent<Rigidbody>().angularVelocity.y < 1) // If we are not steering and we are handbraking and not rotating fast, we apply a random rotationDirection
 					    rotationDirection = Random.Range(-1.0f, 1.0f);
 				    else
-					    rotationDirection = rigidbody.angularVelocity.y; // If we are rotating fast we are applying that rotation to the car
+					    rotationDirection = GetComponent<Rigidbody>().angularVelocity.y; // If we are rotating fast we are applying that rotation to the car
 			    }
 			    // -- Finally we apply this rotation around a point between the cars front wheels.
 			    transform.RotateAround( transform.TransformPoint( (	frontWheels[0].localPosition + frontWheels[1].localPosition) * 0.5f), 
 																    transform.up, 
-																    rigidbody.velocity.magnitude * Mathf.Clamp01(1 - rigidbody.velocity.magnitude / topSpeed) * rotationDirection * Time.deltaTime * 2);
+																    GetComponent<Rigidbody>().velocity.magnitude * Mathf.Clamp01(1 - GetComponent<Rigidbody>().velocity.magnitude / topSpeed) * rotationDirection * Time.deltaTime * 2);
 		    }
 	    }
     }
@@ -595,7 +596,7 @@ public class Car : MonoBehaviour
 
     protected int GetGearState()
     {
-	    Vector3 relativeVelocity = transform.InverseTransformDirection(rigidbody.velocity);
+	    Vector3 relativeVelocity = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity);
 	    float lowLimit = (currentGear == 0 ? 0 : gearSpeeds[currentGear-1]);
 	    return (int)( (relativeVelocity.z - lowLimit) / (gearSpeeds[currentGear - (int)lowLimit]) * (1 - currentGear * 0.1f) + currentGear * 0.1f);
     }
@@ -607,7 +608,7 @@ public class Car : MonoBehaviour
         float rndX = Random.Range(5.0f, 10.0f);
         float rndZ = Random.Range(5.0f, 10.0f);
 
-        rigidbody.velocity = transform.TransformDirection(new Vector3(5.0f, 15.0f, 0.0f));
-        rigidbody.AddExplosionForce(power, transform.position - 3.0f * transform.right, radius, 40.0F);
+        GetComponent<Rigidbody>().velocity = transform.TransformDirection(new Vector3(5.0f, 15.0f, 0.0f));
+        GetComponent<Rigidbody>().AddExplosionForce(power, transform.position - 3.0f * transform.right, radius, 40.0F);
     }
 }

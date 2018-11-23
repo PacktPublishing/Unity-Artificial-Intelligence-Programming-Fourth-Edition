@@ -20,7 +20,7 @@ public class WeaponGun : MonoBehaviour
 
         foreach (GameObject obj in GunGraphics)
         {
-            obj.animation.CrossFade("GunShooting", 0.5f);
+            obj.GetComponent<Animation>().CrossFade("GunShooting", 0.5f);
         }
 
         StartCoroutine("ShootBullets");
@@ -34,7 +34,7 @@ public class WeaponGun : MonoBehaviour
 
             foreach (GameObject obj in GunGraphics)
             {
-                obj.animation.Stop("GunShooting");
+                obj.GetComponent<Animation>().Stop("GunShooting");
             }
         }
 

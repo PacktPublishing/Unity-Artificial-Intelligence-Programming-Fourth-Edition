@@ -40,7 +40,7 @@ public class DynamicObstacle : MonoBehaviour
         print("Obstacle Explosion");
         float rndX = Random.Range(10.0f, 20.0f);
         float rndZ = Random.Range(10.0f, 20.0f);
-        rigidbody.AddExplosionForce(power, transform.position - new Vector3(rndX, 10.0f, rndZ), radius, 20.0F);
-        rigidbody.velocity = transform.TransformDirection(new Vector3(0.0f, 10.0f, 0.0f));
+        GetComponent<Rigidbody>().AddExplosionForce(power, transform.position - new Vector3(rndX, 10.0f, rndZ), radius, 20.0F);
+        GetComponent<Rigidbody>().velocity = transform.TransformDirection(new Vector3(0.0f, 10.0f, 0.0f));
     }
 }
