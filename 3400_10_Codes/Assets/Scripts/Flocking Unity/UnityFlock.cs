@@ -57,7 +57,7 @@ public class UnityFlock : MonoBehaviour
 		    otherFlocks[i] = (UnityFlock)tempFlocks[i];
 	    }
 
-        GameObject FlockObject = GameObject.Find("FlockObject");
+        GameObject FlockObject = GameObject.Find("FlockController");
         transform.parent = FlockObject.transform;
 
         //Calculate random push depends on the random frequency provided

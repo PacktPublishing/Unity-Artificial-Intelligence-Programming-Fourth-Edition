@@ -101,7 +101,62 @@ ModelImporter:
     4300028: Wheel_FL
     4300030: Wheel_RL001
     4300032: Wheel_FL001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Body
+    second: {fileID: 2100000, guid: 9fae2ca8b8eb4e543bea4bb24da4afc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Bumper
+    second: {fileID: 2100000, guid: 006bd1c51e92a984da3e00e5abb6d4a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_CoverBack
+    second: {fileID: 2100000, guid: 69826a4799d3bf64f9c78d3f917554bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_CoverFront
+    second: {fileID: 2100000, guid: 13a1526ec8919c645b7313ef95ee0b5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Door
+    second: {fileID: 2100000, guid: 1af1df597190bcf418b75331829220a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Glass
+    second: {fileID: 2100000, guid: a965b43e41aaedc44acd6549ab34a85c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Interiors
+    second: {fileID: 2100000, guid: 479e7df2ca55a6a42b99cad1a035a7bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_LightCoverBack
+    second: {fileID: 2100000, guid: 93e6c5a6c72b76742a403bcb439a70ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_LightCoverFront
+    second: {fileID: 2100000, guid: 811a3b9e1dc5ba34681b5030b64d6aad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Tire
+    second: {fileID: 2100000, guid: 45d0a4f8bc51c82409eddbf0ea853a5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: e6ad0df69fc8b334b984c8ea61947429, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -120,7 +175,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
+    importConstraints: 1
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -145,7 +200,7 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
+    preserveHierarchy: 1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001

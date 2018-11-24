@@ -50,7 +50,7 @@ public class WeaponMissile: MonoBehaviour
     private IEnumerator ShootMissiles()
     {
         SpawnMissile();
-        yield return new WaitForSeconds(Random.RandomRange(0.3f, 0.6f));
+        yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
         StartCoroutine("ShootMissiles");
     }
 
