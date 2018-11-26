@@ -2,11 +2,6 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public Transform targetMarker;
-
-    void Start ()
-    {
-    }
 
     void Update ()
     {
@@ -21,7 +16,7 @@ public class Target : MonoBehaviour
             if (Physics.Raycast(ray.origin, ray.direction, out hitInfo)) 
             {
                 Vector3 targetPosition = hitInfo.point;
-                targetMarker.position = targetPosition;
+                transform.position = targetPosition;
             }
         }
     }
