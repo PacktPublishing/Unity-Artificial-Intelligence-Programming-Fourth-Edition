@@ -537,6 +537,7 @@ GameObject:
   - component: {fileID: 1163097490}
   - component: {fileID: 1163097491}
   - component: {fileID: 1163097492}
+  - component: {fileID: 1163097493}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Player
@@ -616,7 +617,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: -0.350885, y: 7.4609146, z: -0.016777996}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1163097491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +645,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1163097493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1163097486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 197424970a8398c49af3a0ee1de64e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectName: 0
 --- !u!1 &1171499107
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1181073512}
   - component: {fileID: 1181073513}
-  - component: {fileID: 1181073514}
+  - component: {fileID: 1181073515}
   m_Layer: 0
   m_Name: Sensor
   m_TagString: Untagged
@@ -788,18 +801,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 14.4, y: 1, z: 6.6}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1181073514
+--- !u!114 &1181073515
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11400000, guid: 1b3c673ca560fea47a51a9392ade86e9,
-    type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1181073511}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72e694ce0ed484740b447a42d5822e13, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bac118f2d09a034a8bf697db4c2580c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bDebug: 1
+  aspectName: 0
+  detectionRate: 1
+  FieldOfView: 45
+  ViewDistance: 100
 --- !u!1 &1432296353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,8 +1071,6 @@ GameObject:
   - component: {fileID: 1876867370}
   - component: {fileID: 1876867368}
   - component: {fileID: 1876867371}
-  - component: {fileID: 1876867372}
-  - component: {fileID: 1876867373}
   m_Layer: 0
   m_Name: AI_Character
   m_TagString: Untagged
@@ -1094,7 +1109,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: ec27372b463b48a41a0b6617679d5416, type: 2}
+  - {fileID: 2100000, guid: 8b820f475600abf41946a150ea5b643f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1138,38 +1153,17 @@ BoxCollider:
 --- !u!114 &1876867371
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11400002, guid: 1b3c673ca560fea47a51a9392ade86e9,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1876867366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 929100bae651f9b4e8697197df8dbf4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1876867372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11400004, guid: 1b3c673ca560fea47a51a9392ade86e9,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1876867366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e18de0db2fca4910b87ba25245496b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1876867373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1876867366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72e694ce0ed484740b447a42d5822e13, type: 3}
+  m_Script: {fileID: 11500000, guid: 0149137ab40c00344862e5d59535088f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bDebug: 1
+  aspectName: 0
+  detectionRate: 1
 --- !u!1 &1954060881
 GameObject:
   m_ObjectHideFlags: 0

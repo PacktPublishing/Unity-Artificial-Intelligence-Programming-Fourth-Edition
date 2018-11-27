@@ -7,13 +7,13 @@ public class Sense : MonoBehaviour {
 
 	protected float elapsedTime = 0.0f;
 
-	protected virtual void Initialise() { }
+	protected virtual void Initialize() { }
 	protected virtual void UpdateSense() { }
 
 	// Use this for initialization
 	void Start () {
 		elapsedTime = 0.0f;
-		Initialise();
+		Initialize();
 	}
 	
 	// Update is called once per frame

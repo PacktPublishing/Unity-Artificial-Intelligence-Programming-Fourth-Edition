@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Perspective : Sense
+public class Sight : Sense
 {
     public int FieldOfView = 45;
     public int ViewDistance = 100;
@@ -9,7 +9,7 @@ public class Perspective : Sense
     private Transform playerTrans;
     private Vector3 rayDirection;
 
-    protected override void Initialise() 
+    protected override void Initialize() 
     {
         playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -60,11 +60,9 @@ public class Perspective : Sense
         Vector3 frontRayPoint = transform.position + (transform.forward * ViewDistance);
 
         //Approximate perspective visualization
-        Vector3 leftRayPoint = frontRayPoint;
-        leftRayPoint.x += FieldOfView * 0.5f;
+        Vector3 leftRayPoint = Quaternion.Euler(0,FieldOfView * 0.5f ,0) * frontRayPoint;
 
-        Vector3 rightRayPoint = frontRayPoint;
-        rightRayPoint.x -= FieldOfView * 0.5f;
+        Vector3 rightRayPoint = Quaternion.Euler(0, - FieldOfView*0.5f, 0) *  frontRayPoint;
 
         Debug.DrawLine(transform.position, frontRayPoint, Color.green);
         Debug.DrawLine(transform.position, leftRayPoint, Color.green);
