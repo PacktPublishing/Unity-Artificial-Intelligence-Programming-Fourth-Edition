@@ -10,7 +10,7 @@ public class Flock : MonoBehaviour
 {
 	internal FlockController controller;
 
-    private Rigidbody rigidbody;
+    private new Rigidbody rigidbody;
 
     private void Start()
     {
