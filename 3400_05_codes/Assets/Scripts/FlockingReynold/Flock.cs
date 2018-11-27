@@ -10,6 +10,13 @@ public class Flock : MonoBehaviour
 {
 	internal FlockController controller;
 
+    private Rigidbody rigidbody;
+
+    private void Start()
+    {
+        this.rigidbody = GetComponent<Rigidbody>();
+    }
+
     void Update()
     {
         if (controller)
@@ -17,17 +24,17 @@ public class Flock : MonoBehaviour
             Vector3 relativePos = steer() * Time.deltaTime;
 
             if(relativePos != Vector3.zero)
-                GetComponent<Rigidbody>().velocity = relativePos;
+                rigidbody.velocity = relativePos;
 
             // enforce minimum and maximum speeds for the boids
-            float speed = GetComponent<Rigidbody>().velocity.magnitude;
+            float speed = rigidbody.velocity.magnitude;
             if (speed > controller.maxVelocity)
             {
-                GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * controller.maxVelocity;
+                rigidbody.velocity = rigidbody.velocity.normalized * controller.maxVelocity;
             }
             else if (speed < controller.minVelocity)
             {
-                GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * controller.minVelocity;
+                rigidbody.velocity = rigidbody.velocity.normalized * controller.minVelocity;
             }
         }
     }
@@ -36,7 +43,7 @@ public class Flock : MonoBehaviour
 	private Vector3 steer()
 	{
 		Vector3 center = controller.flockCenter - transform.localPosition;			// cohesion
-		Vector3 velocity = controller.flockVelocity - GetComponent<Rigidbody>().velocity; 			// alignment
+		Vector3 velocity = controller.flockVelocity - rigidbody.velocity; 			// alignment
 		Vector3 follow = controller.target.localPosition - transform.localPosition; // follow leader
 		Vector3 separation = Vector3.zero; 											// separation
 

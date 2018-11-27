@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UnityFlock : MonoBehaviour 
 {
-    public float minSpeed = 100.0f;         //movement speed of the flock
+    public float minSpeed = 20.0f;         //movement speed of the flock
     public float turnSpeed = 20.0f;         //rotation speed of the flock
     public float randomFreq = 20.0f;        
 
@@ -13,7 +13,7 @@ public class UnityFlock : MonoBehaviour
 
     public float gravity = 2.0f;            //Gravity of the flock
 
-    public float avoidanceRadius = 400.0f;  //Minimum distance between flocks
+    public float avoidanceRadius = 50.0f;  //Minimum distance between flocks
     public float avoidanceForce = 20.0f;
 
     public float followVelocity = 4.0f;
