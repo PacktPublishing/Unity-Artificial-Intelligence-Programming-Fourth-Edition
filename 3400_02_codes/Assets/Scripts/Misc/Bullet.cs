@@ -4,10 +4,13 @@ using System.Collections;
 public class Bullet : MonoBehaviour
 {
     //Explosion Effect
-    public GameObject Explosion;
-
-    public float Speed = 600.0f;
-    public float LifeTime = 3.0f;
+    [SerializeField]
+    private GameObject Explosion;
+    [SerializeField]
+    private float Speed = 600.0f;
+    [SerializeField]
+    private float LifeTime = 3.0f;
+   
     public int damage = 50;
 
     void Start()
